@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기초 대사량 계산기</title>
+    <link rel="stylesheet" href="health.css">
+</head>
+<body>
+    <div class="top-bar">
+        <div class="top-title-con">
+            <img src="./img/로고.png" alt="" width="120px">
+        </div>
+
+        <div class="top-menu-con">
+            <span>로그인</span>
+            <span>서비스</span>
+            <span>그룹소개</span> 
+            <span>좋아요</span>
+        </div>
+
+        <div class="top-option-con">
+            <span>
+                <img src="./img/홈.png" alt="">
+            </span>
+            <span>
+                <img src="./img/설정.png" alt="">
+            </span>
+            <span>
+                <img src="./img/사용자.png" alt="">
+            </span>
+        </div>
+    </div>
+    <div class="wrap">
+        <div class="container">
+            <div class="main-con">
+                <div class="text-box" id="text1">
+                    생명을 유지하는데 필요한 최소한의 에너지량을 말합니다.<br>
+                    체온유지나 호흡, 심장박동 등 기초적인 생명활동을 위한 신진대사에 쓰이는 에너지량으로 보통 휴식상태 또는 움직이지 않고 가만히 있을 때 기초대사량만큼의 에너지를 소모됩니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="cnter-box">
+                <div class="text-bo" id="text3">
+                    계산식
+                </div>
+                <div class="text-bo" id="text4">
+                    남자 : 66.47 + (13.75 × 체중) + (5 × 키) - (6.76 × 나이)
+                </div>
+                <div class="text-bo" id="text5">
+                    여자 : 655.1 + (9.56 × 체중) + (1.85 × 키) - (4.68 × 나이)
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row-box">
+                <span class="gender">성별</span>
+                <select name="성별" id="gender">
+                    <option value="">-선택-</option>
+                    <option value="남자">남자</option>
+                    <option value="여자">여자</option>
+                </select>
+            </div>
+
+            <div class="row-row-box">
+                <span class="input_title">신장</span>
+                <input type="text" id="height" placeholder="키 를 입력하세요.">
+                <span class="inner_text">cm</span>
+                <span class="input_title">체중</span>
+                <input type="text" id="weight" placeholder="몸무게를 입력하세요.">
+                <span class="inner_text">kg</span>
+                <span class="input_title">나이(만)</span>
+                <input type="text" id="age" placeholder="나이를 입력하세요.">
+                <span class="inner_text">세</span>
+            </div>
+
+            <div class="final-box">
+                <span class="input_title">기초대사량</span>
+                <span class="inner_text" id="bmrResult">Kcal</span>
+            </div>
+            
+            <div class="final-row-box">
+                <button onclick="calculateBMR()">계산하기</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function calculateBMR() {
+            const gender = document.getElementById("gender").value;
+            const height = parseFloat(document.getElementById("height").value);
+            const weight = parseFloat(document.getElementById("weight").value);
+            const age = parseInt(document.getElementById("age").value);
+
+            let bmr;
+
+            if (gender === "남자") {
+                bmr = 66.47 + (13.75 * weight) + (5 * height) - (6.76 * age);
+            } else if (gender === "여자") {
+                bmr = 655.1 + (9.56 * weight) + (1.85 * height) - (4.68 * age);
+            } else {
+                alert("성별을 선택하세요.");
+                return;
+            }
+
+            document.getElementById("bmrResult").innerText = bmr.toFixed(2) + " Kcal";
+        }
+    </script>
+
+</body>
+</html>
